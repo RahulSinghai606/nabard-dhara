@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Volume2, Square, Sparkles, WifiOff, AlertTriangle, CheckCircle2 } from "lucide-react";
 import raw from "@/data/enterprises.json";
 import { computePulse, Enterprise } from "@/lib/forecast";
-import { Lang, LANGS, t, ttsLocale, SECTOR_LABEL } from "@/lib/i18n";
+import { Lang, LANGS, t, ttsLocale, SECTOR_LABEL, flagText } from "@/lib/i18n";
 import { speak, stopSpeak } from "@/lib/voice";
 import DharaOrb from "@/components/DharaOrb";
 
@@ -44,7 +44,7 @@ export default function MyEnterprise() {
             riskBand: pulse.riskBand,
             runwayMonths: pulse.runwayMonths,
             emiCover: pulse.emiCover,
-            flags: pulse.flags.map((f) => ({ title: f.title, detail: f.detail })),
+            flags: pulse.flags.map((f) => flagText("en", f.id, f.params, SECTOR_LABEL.en[ent.sector])),
             forecast: pulse.forecast.map((f) => ({ label: f.label, net: f.net })),
             drivers: pulse.drivers,
           },
@@ -126,7 +126,7 @@ export default function MyEnterprise() {
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <span className="font-display text-2xl font-bold">{100 - pulse.riskScore}</span>
-                <span className="text-[8px] uppercase tracking-wide text-white/60">health</span>
+                <span className="text-[8px] uppercase tracking-wide text-white/60">{S("health")}</span>
               </div>
             </div>
             <div className="text-center">
@@ -152,7 +152,7 @@ export default function MyEnterprise() {
                 {pulse.flags.slice(0, 3).map((f) => (
                   <div key={f.id} className={`flex items-start gap-2.5 rounded-2xl p-3 ${f.severity === "high" ? "bg-alert/[0.07] border border-alert/30" : "bg-amber/[0.08] border border-amber/30"}`}>
                     <AlertTriangle className={`w-4 h-4 shrink-0 mt-0.5 ${f.severity === "high" ? "text-alert" : "text-amber"}`} />
-                    <p className="text-[13px] text-ink leading-snug font-medium">{f.title}</p>
+                    <p className="text-[13px] text-ink leading-snug font-medium">{flagText(lang, f.id, f.params, SECTOR_LABEL[lang][ent.sector]).title}</p>
                   </div>
                 ))}
               </div>

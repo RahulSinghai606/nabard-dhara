@@ -37,6 +37,7 @@ export const STR: Record<Lang, Dict> = {
     actions: "Do this now",
     listen: "Listen",
     stop: "Stop",
+    back: "Back",
     addRecord: "Add record",
     newEntry: "New entry",
     speakEntry: "Speak your entry",
@@ -60,6 +61,16 @@ export const STR: Record<Lang, Dict> = {
     village: "Village",
     alerts: "Alerts",
     noAlerts: "No stress flags. Keep going!",
+    askDhara: "Ask DHARA",
+    voiceFirst: "voice-first",
+    liveTag: "LIVE · Insight Engine",
+    offlineTag: "OFFLINE TEMPLATE",
+    officerNoteLabel: "Officer note",
+    chartNote: "Seasonal model + trend + UPI/mandi/weather signals · computed on this device · band = 80% confidence",
+    netLabel: "Net (income − expenses − EMI)",
+    estd: "est.",
+    health: "health",
+    standbyHint: "Explainable flags above are computed on-device. Ask DHARA for spoken, plain-language advice.",
   },
   hi: {
     cockpit: "फ़ील्ड अधिकारी कॉकपिट",
@@ -84,6 +95,7 @@ export const STR: Record<Lang, Dict> = {
     actions: "अभी यह करें",
     listen: "सुनें",
     stop: "रोकें",
+    back: "पीछे",
     addRecord: "नई प्रविष्टि",
     newEntry: "नई प्रविष्टि",
     speakEntry: "बोलकर दर्ज करें",
@@ -107,6 +119,16 @@ export const STR: Record<Lang, Dict> = {
     village: "गाँव",
     alerts: "चेतावनियाँ",
     noAlerts: "कोई दबाव संकेत नहीं। बढ़िया चल रहा है!",
+    askDhara: "धारा से पूछें",
+    voiceFirst: "बोलकर सुनने योग्य",
+    liveTag: "लाइव · इनसाइट इंजन",
+    offlineTag: "ऑफ़लाइन टेम्पलेट",
+    officerNoteLabel: "अधिकारी नोट",
+    chartNote: "मौसमी मॉडल + रुझान + UPI/मंडी/मौसम संकेत · इसी डिवाइस पर गणना · बैंड = 80% विश्वास",
+    netLabel: "शुद्ध (आय − खर्च − EMI)",
+    estd: "स्थापित",
+    health: "सेहत",
+    standbyHint: "ऊपर की चेतावनियाँ इसी डिवाइस पर बनी हैं। बोलकर सरल सलाह के लिए धारा से पूछें।",
   },
   bn: {
     cockpit: "ফিল্ড অফিসার ককপিট",
@@ -131,6 +153,7 @@ export const STR: Record<Lang, Dict> = {
     actions: "এখনই করুন",
     listen: "শুনুন",
     stop: "থামান",
+    back: "পিছনে",
     addRecord: "নতুন এন্ট্রি",
     newEntry: "নতুন এন্ট্রি",
     speakEntry: "বলে এন্ট্রি করুন",
@@ -154,6 +177,16 @@ export const STR: Record<Lang, Dict> = {
     village: "গ্রাম",
     alerts: "সতর্কতা",
     noAlerts: "কোনো চাপ নেই। চালিয়ে যান!",
+    askDhara: "ধারাকে জিজ্ঞাসা করুন",
+    voiceFirst: "শুনে বোঝার মতো",
+    liveTag: "লাইভ · ইনসাইট ইঞ্জিন",
+    offlineTag: "অফলাইন টেমপ্লেট",
+    officerNoteLabel: "অফিসার নোট",
+    chartNote: "মৌসুমি মডেল + প্রবণতা + UPI/মান্ডি/আবহাওয়া সংকেত · এই ডিভাইসেই গণনা · ব্যান্ড = ৮০% আস্থা",
+    netLabel: "নিট (আয় − খরচ − EMI)",
+    estd: "প্রতিষ্ঠিত",
+    health: "স্বাস্থ্য",
+    standbyHint: "উপরের সতর্কতাগুলি এই ডিভাইসেই তৈরি। সহজ ভাষায় শোনা পরামর্শের জন্য ধারাকে জিজ্ঞাসা করুন।",
   },
   mr: {
     cockpit: "फील्ड अधिकारी कॉकपिट",
@@ -178,6 +211,7 @@ export const STR: Record<Lang, Dict> = {
     actions: "आत्ता हे करा",
     listen: "ऐका",
     stop: "थांबवा",
+    back: "मागे",
     addRecord: "नवीन नोंद",
     newEntry: "नवीन नोंद",
     speakEntry: "बोलून नोंदवा",
@@ -201,6 +235,16 @@ export const STR: Record<Lang, Dict> = {
     village: "गाव",
     alerts: "इशारे",
     noAlerts: "कोणतेही ताण-संकेत नाहीत. उत्तम!",
+    askDhara: "धाराला विचारा",
+    voiceFirst: "ऐकण्याजोगा",
+    liveTag: "लाइव्ह · इनसाइट इंजिन",
+    offlineTag: "ऑफलाइन टेम्पलेट",
+    officerNoteLabel: "अधिकारी टीप",
+    chartNote: "हंगामी मॉडेल + कल + UPI/मंडी/हवामान संकेत · याच डिव्हाइसवर गणना · बँड = 80% विश्वास",
+    netLabel: "निव्वळ (उत्पन्न − खर्च − EMI)",
+    estd: "स्थापना",
+    health: "आरोग्य",
+    standbyHint: "वरील इशारे याच डिव्हाइसवर तयार झाले आहेत. सोप्या भाषेत ऐकण्यासाठी धाराला विचारा.",
   },
   ta: {
     cockpit: "கள அலுவலர் காக்பிட்",
@@ -225,6 +269,7 @@ export const STR: Record<Lang, Dict> = {
     actions: "இப்போதே செய்யுங்கள்",
     listen: "கேளுங்கள்",
     stop: "நிறுத்து",
+    back: "பின்செல்",
     addRecord: "புதிய பதிவு",
     newEntry: "புதிய பதிவு",
     speakEntry: "பேசி பதிவு செய்யுங்கள்",
@@ -248,6 +293,16 @@ export const STR: Record<Lang, Dict> = {
     village: "கிராமம்",
     alerts: "எச்சரிக்கைகள்",
     noAlerts: "அழுத்த அறிகுறிகள் இல்லை. தொடருங்கள்!",
+    askDhara: "தாராவிடம் கேளுங்கள்",
+    voiceFirst: "கேட்கக்கூடியது",
+    liveTag: "லைவ் · இன்சைட் எஞ்சின்",
+    offlineTag: "ஆஃப்லைன் டெம்ப்ளேட்",
+    officerNoteLabel: "அலுவலர் குறிப்பு",
+    chartNote: "பருவ மாதிரி + போக்கு + UPI/மண்டி/வானிலை சமிக்ஞைகள் · இந்தச் சாதனத்திலேயே கணக்கீடு · பட்டை = 80% நம்பிக்கை",
+    netLabel: "நிகர (வருமானம் − செலவு − EMI)",
+    estd: "நிறுவப்பட்டது",
+    health: "நலம்",
+    standbyHint: "மேலே உள்ள எச்சரிக்கைகள் இந்தச் சாதனத்திலேயே கணக்கிடப்பட்டவை. எளிய மொழியில் கேட்க தாராவிடம் கேளுங்கள்.",
   },
 };
 
@@ -259,10 +314,144 @@ export const SECTOR_LABEL: Record<Lang, Record<string, string>> = {
   ta: { dairy: "பால் பண்ணை", poultry: "கோழி வளர்ப்பு", food: "உணவு பதப்படுத்தல்", handicraft: "கைவினை", retail: "கிராமப்புற சில்லறை" },
 };
 
+export const MONTHS_SHORT: Record<Lang, string[]> = {
+  en: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+  hi: ["जन","फ़र","मार्च","अप्रै","मई","जून","जुल","अग","सित","अक्टू","नव","दिस"],
+  bn: ["জানু","ফেব","মার্চ","এপ্রি","মে","জুন","জুল","আগ","সেপ্ট","অক্টো","নভে","ডিসে"],
+  mr: ["जाने","फेब्रु","मार्च","एप्रि","मे","जून","जुलै","ऑग","सप्टें","ऑक्टो","नोव्हें","डिसें"],
+  ta: ["ஜன","பிப்","மார்","ஏப்","மே","ஜூன்","ஜூலை","ஆக","செப்","அக்","நவ","டிச"],
+};
+
+const EN_MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+export function localizeMonthLabel(lang: Lang, label: string): string {
+  const [mon, yr] = label.split(" ");
+  const idx = EN_MONTHS.indexOf(mon);
+  if (idx === -1) return label;
+  return `${MONTHS_SHORT[lang][idx]} ${yr}`;
+}
+
 export function t(lang: Lang, key: string): string {
   return STR[lang][key] ?? STR.en[key] ?? key;
 }
 
 export function ttsLocale(lang: Lang): string {
   return LANGS.find((l) => l.code === lang)?.tts ?? "en-IN";
+}
+
+// ── Risk-flag & factor translations (rendered from forecast keys + params) ──
+
+type FlagText = { title: string; detail: string };
+
+export const FLAG_STR: Record<Lang, Record<string, FlagText>> = {
+  en: {
+    cashflow: { title: "Negative cash flow in {neg} of next {h} months", detail: "Average projected net is ₹{avg}/month after the ₹{emi} EMI." },
+    runway: { title: "Savings cover only ~{r} months at projected burn", detail: "Reserves ₹{sav} vs projected shortfall ₹{burn}/month." },
+    repayment: { title: "Repayment stress: EMI cover {cover}× (safe ≥ 1.5×)", detail: "{lender} EMI ₹{emi} vs projected operating surplus." },
+    market: { title: "Input price index up {pct}% over 6 months", detail: "Commodity/mandi trend is compressing margins for the {sector} sector." },
+    demand: { title: "Digital sales proxy down {pct}%", detail: "UPI transaction volume (aggregated, no PII) suggests local demand softening." },
+    climate: { title: "Monsoon deficit detected in operating region", detail: "Rainfall anomaly below −18% raises fodder/raw-material cost risk next season." },
+    seasonal: { title: "Seasonal lean period in forecast window", detail: "A known low-income season falls in the next 6 months — plan reserves now." },
+  },
+  hi: {
+    cashflow: { title: "अगले {h} में से {neg} महीनों में नकदी घाटा", detail: "₹{emi} EMI के बाद औसत अनुमानित शुद्ध ₹{avg}/माह है।" },
+    runway: { title: "बचत केवल ~{r} महीने चलेगी (अनुमानित घाटे पर)", detail: "जमा ₹{sav} बनाम अनुमानित कमी ₹{burn}/माह।" },
+    repayment: { title: "क़िस्त चुकाने का दबाव: EMI कवर {cover}× (सुरक्षित ≥ 1.5×)", detail: "{lender} की EMI ₹{emi} बनाम अनुमानित परिचालन बचत।" },
+    market: { title: "कच्चे माल का भाव 6 महीनों में {pct}% बढ़ा", detail: "मंडी/कमोडिटी का रुझान {sector} क्षेत्र का मुनाफ़ा घटा रहा है।" },
+    demand: { title: "डिजिटल बिक्री संकेत {pct}% गिरा", detail: "UPI लेन-देन की मात्रा (समग्र, बिना निजी जानकारी) स्थानीय माँग में नरमी दिखाती है।" },
+    climate: { title: "कार्यक्षेत्र में मानसून की कमी पाई गई", detail: "वर्षा −18% से नीचे — अगले सीज़न में चारे/कच्चे माल की लागत बढ़ने का जोखिम।" },
+    seasonal: { title: "पूर्वानुमान अवधि में मंदा सीज़न", detail: "अगले 6 महीनों में कम आय वाला ज्ञात सीज़न है — अभी से बचत की योजना बनाएँ।" },
+  },
+  bn: {
+    cashflow: { title: "আগামী {h} মাসের মধ্যে {neg} মাসে নগদ ঘাটতি", detail: "₹{emi} EMI-র পরে গড় প্রক্ষেপিত নিট ₹{avg}/মাস।" },
+    runway: { title: "সঞ্চয়ে মাত্র ~{r} মাস চলবে (প্রক্ষেপিত ঘাটতিতে)", detail: "জমা ₹{sav} বনাম প্রক্ষেপিত ঘাটতি ₹{burn}/মাস।" },
+    repayment: { title: "কিস্তি পরিশোধের চাপ: EMI কভার {cover}× (নিরাপদ ≥ 1.5×)", detail: "{lender}-এর EMI ₹{emi} বনাম প্রক্ষেপিত পরিচালন উদ্বৃত্ত।" },
+    market: { title: "কাঁচামালের দাম ৬ মাসে {pct}% বেড়েছে", detail: "মান্ডি/পণ্যের প্রবণতা {sector} খাতের মার্জিন কমাচ্ছে।" },
+    demand: { title: "ডিজিটাল বিক্রয় সংকেত {pct}% কমেছে", detail: "UPI লেনদেনের পরিমাণ (সমষ্টিগত, ব্যক্তিগত তথ্য ছাড়া) স্থানীয় চাহিদা নরম হওয়ার ইঙ্গিত দিচ্ছে।" },
+    climate: { title: "কর্মাঞ্চলে বর্ষার ঘাটতি ধরা পড়েছে", detail: "বৃষ্টি −18%-এর নিচে — আগামী মৌসুমে খাদ্য/কাঁচামালের খরচ বাড়ার ঝুঁকি।" },
+    seasonal: { title: "পূর্বাভাস সময়ে মন্দা মৌসুম", detail: "আগামী ৬ মাসে কম আয়ের চেনা মৌসুম আসছে — এখনই সঞ্চয়ের পরিকল্পনা করুন।" },
+  },
+  mr: {
+    cashflow: { title: "पुढील {h} पैकी {neg} महिन्यांत रोख तूट", detail: "₹{emi} EMI नंतर सरासरी अंदाजित निव्वळ ₹{avg}/महिना." },
+    runway: { title: "बचत केवळ ~{r} महिने पुरेल (अंदाजित तुटीवर)", detail: "ठेव ₹{sav} विरुद्ध अंदाजित तूट ₹{burn}/महिना." },
+    repayment: { title: "हप्ता फेडीचा ताण: EMI कव्हर {cover}× (सुरक्षित ≥ 1.5×)", detail: "{lender} ची EMI ₹{emi} विरुद्ध अंदाजित परिचालन शिल्लक." },
+    market: { title: "कच्च्या मालाचा भाव ६ महिन्यांत {pct}% वाढला", detail: "मंडी/कमोडिटी कल {sector} क्षेत्राचा नफा कमी करत आहे." },
+    demand: { title: "डिजिटल विक्री संकेत {pct}% घटला", detail: "UPI व्यवहारांचे प्रमाण (एकत्रित, वैयक्तिक माहितीशिवाय) स्थानिक मागणी मंदावल्याचे दर्शवते." },
+    climate: { title: "कार्यक्षेत्रात पावसाची तूट आढळली", detail: "पर्जन्य −18% खाली — पुढील हंगामात चारा/कच्च्या मालाच्या खर्चाचा धोका." },
+    seasonal: { title: "अंदाज कालावधीत मंदीचा हंगाम", detail: "पुढील ६ महिन्यांत कमी उत्पन्नाचा ज्ञात हंगाम आहे — आत्ताच बचतीचे नियोजन करा." },
+  },
+  ta: {
+    cashflow: { title: "அடுத்த {h} மாதங்களில் {neg} மாதங்களில் பணப்பற்றாக்குறை", detail: "₹{emi} EMI-க்குப் பிறகு சராசரி நிகர மதிப்பீடு ₹{avg}/மாதம்." },
+    runway: { title: "சேமிப்பு ~{r} மாதங்களே நீடிக்கும் (மதிப்பிட்ட பற்றாக்குறையில்)", detail: "இருப்பு ₹{sav} vs மதிப்பிட்ட பற்றாக்குறை ₹{burn}/மாதம்." },
+    repayment: { title: "திருப்பிச் செலுத்தும் அழுத்தம்: EMI பாதுகாப்பு {cover}× (பாதுகாப்பு ≥ 1.5×)", detail: "{lender} EMI ₹{emi} vs மதிப்பிட்ட இயக்க உபரி." },
+    market: { title: "மூலப்பொருள் விலை 6 மாதங்களில் {pct}% உயர்வு", detail: "மண்டி/சரக்கு போக்கு {sector} துறையின் லாபத்தை குறைக்கிறது." },
+    demand: { title: "டிஜிட்டல் விற்பனை சமிக்ஞை {pct}% சரிவு", detail: "UPI பரிவர்த்தனை அளவு (தொகுப்பு, தனிநபர் தகவல் இல்லை) உள்ளூர் தேவை தளர்வதை காட்டுகிறது." },
+    climate: { title: "செயல்பாட்டு பகுதியில் பருவமழை பற்றாக்குறை", detail: "மழை −18%-க்கு கீழ் — அடுத்த பருவத்தில் தீவனம்/மூலப்பொருள் செலவு உயரும் அபாயம்." },
+    seasonal: { title: "முன்னறிவிப்பு காலத்தில் மந்தமான பருவம்", detail: "அடுத்த 6 மாதங்களில் குறைந்த வருமான பருவம் — இப்போதே சேமிப்பை திட்டமிடுங்கள்." },
+  },
+};
+
+export const FACTOR_STR: Record<Lang, Record<string, string>> = {
+  en: {
+    inputCost: "Input cost trend (mandi)", demandProxy: "Demand proxy (UPI trend)", emiLoad: "Loan EMI load",
+    seasonLow: "Seasonal low period", burnRate: "Projected burn rate", reserves: "Current reserves",
+    seasonalRecovery: "Seasonal recovery ahead", surplusTrend: "Operating surplus trend", costPressure: "Input cost pressure",
+    incomeSeason: "Income seasonality", mandiMomentum: "Mandi price momentum", passThrough: "Sector cost pass-through",
+    upiTrend: "UPI txn trend", competition: "Local competition / footfall", sectorSeason: "Sector seasonality",
+    reservePos: "Reserve position", rainAnomaly: "Rainfall anomaly", inputDep: "Fodder/input dependence",
+  },
+  hi: {
+    inputCost: "कच्चे माल की लागत (मंडी)", demandProxy: "माँग संकेत (UPI रुझान)", emiLoad: "ऋण EMI का बोझ",
+    seasonLow: "मंदा सीज़न", burnRate: "अनुमानित मासिक घाटा", reserves: "मौजूदा जमा",
+    seasonalRecovery: "आगे सीज़न में सुधार", surplusTrend: "परिचालन बचत का रुझान", costPressure: "लागत का दबाव",
+    incomeSeason: "आय की मौसमीयता", mandiMomentum: "मंडी भाव की चाल", passThrough: "क्षेत्र पर लागत का असर",
+    upiTrend: "UPI लेन-देन रुझान", competition: "स्थानीय प्रतिस्पर्धा / ग्राहक", sectorSeason: "क्षेत्रीय मौसमीयता",
+    reservePos: "जमा की स्थिति", rainAnomaly: "वर्षा विचलन", inputDep: "चारा/कच्चे माल पर निर्भरता",
+  },
+  bn: {
+    inputCost: "কাঁচামালের খরচ (মান্ডি)", demandProxy: "চাহিদা সংকেত (UPI প্রবণতা)", emiLoad: "ঋণ EMI-র বোঝা",
+    seasonLow: "মন্দা মৌসুম", burnRate: "প্রক্ষেপিত মাসিক ঘাটতি", reserves: "বর্তমান জমা",
+    seasonalRecovery: "সামনে মৌসুমি পুনরুদ্ধার", surplusTrend: "পরিচালন উদ্বৃত্তের প্রবণতা", costPressure: "খরচের চাপ",
+    incomeSeason: "আয়ের মৌসুমিতা", mandiMomentum: "মান্ডি দামের গতি", passThrough: "খাতে খরচের প্রভাব",
+    upiTrend: "UPI লেনদেন প্রবণতা", competition: "স্থানীয় প্রতিযোগিতা / ক্রেতা", sectorSeason: "খাতের মৌসুমিতা",
+    reservePos: "জমার অবস্থা", rainAnomaly: "বৃষ্টি বিচ্যুতি", inputDep: "খাদ্য/কাঁচামাল নির্ভরতা",
+  },
+  mr: {
+    inputCost: "कच्च्या मालाचा खर्च (मंडी)", demandProxy: "मागणी संकेत (UPI कल)", emiLoad: "कर्ज EMI चा भार",
+    seasonLow: "मंदीचा हंगाम", burnRate: "अंदाजित मासिक तूट", reserves: "सध्याची ठेव",
+    seasonalRecovery: "पुढे हंगामी सुधारणा", surplusTrend: "परिचालन शिल्लकीचा कल", costPressure: "खर्चाचा दबाव",
+    incomeSeason: "उत्पन्नाची हंगामीता", mandiMomentum: "मंडी भावाची गती", passThrough: "क्षेत्रावर खर्चाचा परिणाम",
+    upiTrend: "UPI व्यवहार कल", competition: "स्थानिक स्पर्धा / ग्राहक", sectorSeason: "क्षेत्रीय हंगामीता",
+    reservePos: "ठेवीची स्थिती", rainAnomaly: "पर्जन्य विचलन", inputDep: "चारा/कच्च्या मालावर अवलंबन",
+  },
+  ta: {
+    inputCost: "மூலப்பொருள் செலவு (மண்டி)", demandProxy: "தேவை சமிக்ஞை (UPI போக்கு)", emiLoad: "கடன் EMI சுமை",
+    seasonLow: "மந்தமான பருவம்", burnRate: "மதிப்பிட்ட மாத பற்றாக்குறை", reserves: "தற்போதைய இருப்பு",
+    seasonalRecovery: "வரவிருக்கும் பருவ மீட்சி", surplusTrend: "இயக்க உபரி போக்கு", costPressure: "செலவு அழுத்தம்",
+    incomeSeason: "வருமான பருவநிலை", mandiMomentum: "மண்டி விலை வேகம்", passThrough: "துறை மீதான செலவு தாக்கம்",
+    upiTrend: "UPI பரிவர்த்தனை போக்கு", competition: "உள்ளூர் போட்டி / வாடிக்கையாளர்", sectorSeason: "துறை பருவநிலை",
+    reservePos: "இருப்பு நிலை", rainAnomaly: "மழை விலகல்", inputDep: "தீவனம்/மூலப்பொருள் சார்பு",
+  },
+};
+
+export const TYPE_LABEL: Record<Lang, Record<string, string>> = {
+  en: { SHG: "SHG", FPO: "FPO", Entrepreneur: "Entrepreneur" },
+  hi: { SHG: "स्वयं सहायता समूह", FPO: "FPO", Entrepreneur: "उद्यमी" },
+  bn: { SHG: "স্বনির্ভর গোষ্ঠী", FPO: "FPO", Entrepreneur: "উদ্যোক্তা" },
+  mr: { SHG: "बचत गट", FPO: "FPO", Entrepreneur: "उद्योजक" },
+  ta: { SHG: "சுய உதவிக் குழு", FPO: "FPO", Entrepreneur: "தொழில்முனைவோர்" },
+};
+
+export function fmt(template: string, params: Record<string, string | number> = {}): string {
+  return template.replace(/\{(\w+)\}/g, (_, k) => String(params[k] ?? ""));
+}
+
+export function flagText(lang: Lang, id: string, params: Record<string, string | number>, sectorLabel?: string): FlagText {
+  const tmpl = FLAG_STR[lang][id] ?? FLAG_STR.en[id];
+  const p = { ...params };
+  if (sectorLabel) p.sector = sectorLabel;
+  return { title: fmt(tmpl.title, p), detail: fmt(tmpl.detail, p) };
+}
+
+export function factorName(lang: Lang, key: string): string {
+  return FACTOR_STR[lang][key] ?? FACTOR_STR.en[key] ?? key;
 }

@@ -28,7 +28,7 @@ import {
 } from "lucide-react";
 import raw from "@/data/enterprises.json";
 import { computePulse, Enterprise, MonthRow } from "@/lib/forecast";
-import { Lang, LANGS, t, ttsLocale, SECTOR_LABEL } from "@/lib/i18n";
+import { Lang, LANGS, t, ttsLocale, SECTOR_LABEL, TYPE_LABEL, flagText, factorName, localizeMonthLabel } from "@/lib/i18n";
 import { speak, stopSpeak, listenOnce } from "@/lib/voice";
 import PulseChart from "@/components/PulseChart";
 import AnimatedStepper, { Step } from "@/components/AnimatedStepper";
@@ -91,7 +91,7 @@ export default function Cockpit() {
             riskBand: pulse.riskBand,
             runwayMonths: pulse.runwayMonths,
             emiCover: pulse.emiCover,
-            flags: pulse.flags.map((f) => ({ title: f.title, detail: f.detail })),
+            flags: pulse.flags.map((f) => flagText("en", f.id, f.params, SECTOR_LABEL.en[ent.sector])),
             forecast: pulse.forecast.map((f) => ({ label: f.label, net: f.net })),
             drivers: pulse.drivers,
           },
@@ -239,7 +239,7 @@ export default function Cockpit() {
                   <div className="min-w-0 flex-1">
                     <p className="font-semibold text-forest text-sm leading-snug truncate">{e.name}</p>
                     <p className="text-[11px] text-ink-soft truncate">
-                      {SECTOR_LABEL[lang][e.sector]} · {e.type} · {e.district.split(",")[0]}
+                      {SECTOR_LABEL[lang][e.sector]} · {TYPE_LABEL[lang][e.type] ?? e.type} · {e.district.split(",")[0]}
                     </p>
                     <span className={`inline-block mt-1 text-[9px] font-bold uppercase tracking-wider rounded-full px-2 py-0.5 ${BAND_STYLE[p.riskBand]}`}>
                       {S(p.riskBand)}
@@ -259,7 +259,7 @@ export default function Cockpit() {
               <div>
                 <h2 className="font-display text-2xl font-bold leading-snug">{ent.name}</h2>
                 <p className="text-sm text-white/75 mt-0.5">
-                  {SECTOR_LABEL[lang][ent.sector]} · {ent.type} · {S("village")} {ent.village}, {ent.district} · {ent.members} {S("membersLabel")} · est. {ent.since}
+                  {SECTOR_LABEL[lang][ent.sector]} · {TYPE_LABEL[lang][ent.type] ?? ent.type} · {S("village")} {ent.village}, {ent.district} · {ent.members} {S("membersLabel")} · {S("estd")} {ent.since}
                 </p>
               </div>
               <button
@@ -314,11 +314,10 @@ export default function Cockpit() {
             <PulseChart
               history={ent.months}
               forecast={pulse.forecast}
-              labels={{ income: S("income"), net: `Net (${S("income")} − ${S("expenses")} − EMI)`, forecast: S("forecast") }}
+              labels={{ income: S("income"), net: S("netLabel"), forecast: S("forecast") }}
+              formatLabel={(lb) => localizeMonthLabel(lang, lb)}
             />
-            <p className="text-[10px] text-ink-faint mt-1 text-center">
-              Seasonal decomposition + trend + UPI/mandi/weather adjustment · computed on-device · band = 80% confidence
-            </p>
+            <p className="text-[10px] text-ink-faint mt-1 text-center">{S("chartNote")}</p>
           </div>
         </section>
 
@@ -332,20 +331,22 @@ export default function Cockpit() {
               <p className="text-sm text-leaf font-semibold py-4 text-center">{S("noAlerts")}</p>
             ) : (
               <div className="space-y-3">
-                {pulse.flags.map((f) => (
+                {pulse.flags.map((f) => {
+                  const ft = flagText(lang, f.id, f.params, SECTOR_LABEL[lang][ent.sector]);
+                  return (
                   <div key={f.id} className={`rounded-2xl border p-4 ${f.severity === "high" ? "border-alert/50 bg-alert/[0.05]" : f.severity === "medium" ? "border-amber/50 bg-amber/[0.06]" : "border-line bg-bg"}`}>
                     <div className="flex items-start gap-2">
                       <span className={`mt-1 w-2 h-2 rounded-full shrink-0 ${f.severity === "high" ? "bg-alert animate-pulse" : f.severity === "medium" ? "bg-amber" : "bg-sprout"}`} />
                       <div className="min-w-0">
-                        <p className="text-sm font-bold text-forest leading-snug">{f.title}</p>
-                        <p className="text-xs text-ink-soft mt-1 leading-relaxed">{f.detail}</p>
+                        <p className="text-sm font-bold text-forest leading-snug">{ft.title}</p>
+                        <p className="text-xs text-ink-soft mt-1 leading-relaxed">{ft.detail}</p>
                       </div>
                     </div>
                     <div className="mt-2.5 ml-4">
                       <p className="text-[10px] font-bold tracking-[0.15em] uppercase text-ink-faint mb-1.5">{S("whyFlag")}</p>
                       {f.factors.map((fa) => (
-                        <div key={fa.name} className="flex items-center gap-2 mb-1">
-                          <span className="text-[11px] text-ink-soft w-44 truncate">{fa.name}</span>
+                        <div key={fa.key} className="flex items-center gap-2 mb-1">
+                          <span className="text-[11px] text-ink-soft w-44 truncate">{factorName(lang, fa.key)}</span>
                           <div className="flex-1 h-1.5 rounded-full bg-line overflow-hidden">
                             <div className={`h-full ${fa.direction === "down" ? "bg-alert/70" : "bg-leaf/70"}`} style={{ width: `${fa.weight}%` }} />
                           </div>
@@ -354,7 +355,8 @@ export default function Cockpit() {
                       ))}
                     </div>
                   </div>
-                ))}
+                  );
+                })}
               </div>
             )}
           </div>
@@ -366,14 +368,14 @@ export default function Cockpit() {
               <DharaOrb size={52} speaking={speaking} />
               <div>
                 <p className="font-display font-bold">{S("insight")}</p>
-                <p className="text-[11px] text-white/60">{LANGS.find((l) => l.code === lang)?.label} · voice-first</p>
+                <p className="text-[11px] text-white/60">{LANGS.find((l) => l.code === lang)?.label} · {S("voiceFirst")}</p>
               </div>
               <button
                 onClick={askDhara}
                 disabled={insightLoading}
                 className="ml-auto inline-flex items-center gap-1.5 rounded-xl bg-lime text-forest text-xs font-bold px-3.5 py-2 hover:brightness-110 transition-all disabled:opacity-60"
               >
-                <Sparkles className="w-3.5 h-3.5" /> {insightLoading ? "…" : "Ask DHARA"}
+                <Sparkles className="w-3.5 h-3.5" /> {insightLoading ? "…" : S("askDhara")}
               </button>
             </div>
 
@@ -417,16 +419,16 @@ export default function Cockpit() {
                       <Square className="w-3.5 h-3.5" /> {S("stop")}
                     </button>
                   )}
-                  <span className={`text-[10px] ${insight.live ? "text-lime" : "text-amber"}`}>{insight.live ? "LIVE · Insight Engine" : "OFFLINE TEMPLATE"}</span>
+                  <span className={`text-[10px] ${insight.live ? "text-lime" : "text-amber"}`}>{insight.live ? S("liveTag") : S("offlineTag")}</span>
                 </div>
                 {insight.officerNote && (
                   <p className="mt-3 text-[11px] text-white/60 border-t border-white/10 pt-2">
-                    <span className="font-bold text-white/80">Officer note:</span> {insight.officerNote}
+                    <span className="font-bold text-white/80">{S("officerNoteLabel")}:</span> {insight.officerNote}
                   </p>
                 )}
               </motion.div>
             )}
-            {!insight && !insightLoading && <p className="text-xs text-white/50">Explainable flags above are on-device. Ask DHARA for spoken, plain-language advice in {LANGS.find((l) => l.code === lang)?.label}.</p>}
+            {!insight && !insightLoading && <p className="text-xs text-white/50">{S("standbyHint")}</p>}
           </div>
         </section>
       </div>
@@ -450,6 +452,7 @@ export default function Cockpit() {
               </button>
               <AnimatedStepper
                 nextButtonText={t(lang, "review").split(" ")[0]}
+                backButtonText={S("back")}
                 completeText="✓"
                 onFinalStepCompleted={saveEntry}
                 canProceed={(step) => (step === 1 ? !!entry.income : step === 2 ? !!entry.expenses : true)}

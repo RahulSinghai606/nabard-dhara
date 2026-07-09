@@ -44,13 +44,22 @@ export type ForecastPoint = {
   savingsProj: number;
 };
 
-export type Factor = { name: string; weight: number; direction: "up" | "down" };
+// Language-agnostic: components render titles/details/factor names via i18n
+// dictionaries (src/lib/i18n.ts) using these keys + params.
+export type FactorKey =
+  | "inputCost" | "demandProxy" | "emiLoad" | "seasonLow" | "burnRate" | "reserves"
+  | "seasonalRecovery" | "surplusTrend" | "costPressure" | "incomeSeason"
+  | "mandiMomentum" | "passThrough" | "upiTrend" | "competition"
+  | "sectorSeason" | "reservePos" | "rainAnomaly" | "inputDep";
+
+export type Factor = { key: FactorKey; weight: number; direction: "up" | "down" };
+
+export type FlagKey = "cashflow" | "runway" | "repayment" | "market" | "demand" | "climate" | "seasonal";
 
 export type RiskFlag = {
-  id: string;
+  id: FlagKey;
   severity: "high" | "medium" | "watch";
-  title: string;
-  detail: string;
+  params: Record<string, string | number>;
   factors: Factor[];
 };
 
@@ -161,17 +170,18 @@ export function computePulse(e: Enterprise, horizon = 6): PulseResult {
   const upiDecline = upiTrend < -0.08;
   const mandiSpike = mandiTrend > 0.08;
 
+  const inr = (n: number) => Math.round(n).toLocaleString("en-IN");
+
   if (negMonths >= 2) {
     flags.push({
       id: "cashflow",
       severity: negMonths >= 4 ? "high" : "medium",
-      title: `Negative cash flow in ${negMonths} of next ${horizon} months`,
-      detail: `Average projected net is ₹${Math.round(avgNet).toLocaleString("en-IN")}/month after the ₹${e.loan.emi.toLocaleString("en-IN")} EMI.`,
+      params: { neg: negMonths, h: horizon, avg: inr(avgNet), emi: inr(e.loan.emi) },
       factors: attribution([
-        ["Input cost trend (mandi)", mandiSpike ? 0.4 : 0.1, "down"],
-        ["Seasonal low period", dipAhead ? 0.3 : 0.1, "down"],
-        ["Demand proxy (UPI trend)", upiDecline ? 0.35 : 0.05, "down"],
-        ["Loan EMI load", e.loan.emi / Math.max(1, avg(last6, "income")) > 0.12 ? 0.25 : 0.1, "down"],
+        ["inputCost", mandiSpike ? 0.4 : 0.1, "down"],
+        ["seasonLow", dipAhead ? 0.3 : 0.1, "down"],
+        ["demandProxy", upiDecline ? 0.35 : 0.05, "down"],
+        ["emiLoad", e.loan.emi / Math.max(1, avg(last6, "income")) > 0.12 ? 0.25 : 0.1, "down"],
       ]),
     });
   }
@@ -179,12 +189,11 @@ export function computePulse(e: Enterprise, horizon = 6): PulseResult {
     flags.push({
       id: "runway",
       severity: runwayMonths < 2.5 ? "high" : "medium",
-      title: `Savings cover only ~${runwayMonths.toFixed(1)} months at projected burn`,
-      detail: `Reserves ₹${lastRow.savings.toLocaleString("en-IN")} vs projected shortfall ₹${Math.round(monthlyBurn).toLocaleString("en-IN")}/month.`,
+      params: { r: runwayMonths.toFixed(1), sav: inr(lastRow.savings), burn: inr(monthlyBurn) },
       factors: attribution([
-        ["Projected burn rate", 0.5, "down"],
-        ["Current reserves", 0.3, "down"],
-        ["Seasonal recovery ahead", seas[forecast[horizon - 1].month] > 1.05 ? 0.2 : 0.05, "up"],
+        ["burnRate", 0.5, "down"],
+        ["reserves", 0.3, "down"],
+        ["seasonalRecovery", seas[forecast[horizon - 1].month] > 1.05 ? 0.2 : 0.05, "up"],
       ]),
     });
   }
@@ -192,12 +201,11 @@ export function computePulse(e: Enterprise, horizon = 6): PulseResult {
     flags.push({
       id: "repayment",
       severity: emiCover < 1.05 ? "high" : "medium",
-      title: `Repayment stress: EMI cover ${emiCover.toFixed(2)}× (safe ≥ 1.5×)`,
-      detail: `${e.loan.lender} EMI ₹${e.loan.emi.toLocaleString("en-IN")} vs projected operating surplus.`,
+      params: { cover: emiCover.toFixed(2), lender: e.loan.lender, emi: inr(e.loan.emi) },
       factors: attribution([
-        ["Operating surplus trend", 0.45, "down"],
-        ["Input cost pressure", mandiSpike ? 0.35 : 0.1, "down"],
-        ["Income seasonality", dipAhead ? 0.2 : 0.1, "down"],
+        ["surplusTrend", 0.45, "down"],
+        ["costPressure", mandiSpike ? 0.35 : 0.1, "down"],
+        ["incomeSeason", dipAhead ? 0.2 : 0.1, "down"],
       ]),
     });
   }
@@ -205,11 +213,10 @@ export function computePulse(e: Enterprise, horizon = 6): PulseResult {
     flags.push({
       id: "market",
       severity: mandiTrend > 0.15 ? "high" : "watch",
-      title: `Input price index up ${(mandiTrend * 100).toFixed(0)}% over 6 months`,
-      detail: `Commodity/mandi trend is compressing margins for the ${e.sector} sector.`,
+      params: { pct: (mandiTrend * 100).toFixed(0), sector: e.sector },
       factors: attribution([
-        ["Mandi price momentum", 0.6, "down"],
-        ["Sector cost pass-through", 0.4, "down"],
+        ["mandiMomentum", 0.6, "down"],
+        ["passThrough", 0.4, "down"],
       ]),
     });
   }
@@ -217,11 +224,10 @@ export function computePulse(e: Enterprise, horizon = 6): PulseResult {
     flags.push({
       id: "demand",
       severity: upiTrend < -0.15 ? "high" : "watch",
-      title: `Digital sales proxy down ${Math.abs(upiTrend * 100).toFixed(0)}%`,
-      detail: "UPI transaction volume (aggregated, no PII) suggests local demand softening.",
+      params: { pct: Math.abs(upiTrend * 100).toFixed(0) },
       factors: attribution([
-        ["UPI txn trend", 0.55, "down"],
-        ["Local competition / footfall", 0.45, "down"],
+        ["upiTrend", 0.55, "down"],
+        ["competition", 0.45, "down"],
       ]),
     });
   }
@@ -229,11 +235,10 @@ export function computePulse(e: Enterprise, horizon = 6): PulseResult {
     flags.push({
       id: "climate",
       severity: "watch",
-      title: "Monsoon deficit detected in operating region",
-      detail: "Rainfall anomaly below −18% raises fodder/raw-material cost risk next season.",
+      params: {},
       factors: attribution([
-        ["Rainfall anomaly", 0.6, "down"],
-        ["Fodder/input dependence", 0.4, "down"],
+        ["rainAnomaly", 0.6, "down"],
+        ["inputDep", 0.4, "down"],
       ]),
     });
   }
@@ -241,11 +246,10 @@ export function computePulse(e: Enterprise, horizon = 6): PulseResult {
     flags.push({
       id: "seasonal",
       severity: "watch",
-      title: "Seasonal lean period in forecast window",
-      detail: "A known low-income season falls in the next 6 months — plan reserves now.",
+      params: {},
       factors: attribution([
-        ["Sector seasonality", 0.7, "down"],
-        ["Reserve position", 0.3, "up"],
+        ["sectorSeason", 0.7, "down"],
+        ["reservePos", 0.3, "up"],
       ]),
     });
   }
@@ -269,9 +273,9 @@ export function computePulse(e: Enterprise, horizon = 6): PulseResult {
   };
 }
 
-function attribution(raw: [string, number, "up" | "down"][]): Factor[] {
+function attribution(raw: [FactorKey, number, "up" | "down"][]): Factor[] {
   const total = raw.reduce((s, [, w]) => s + w, 0) || 1;
   return raw
-    .map(([name, w, direction]) => ({ name, weight: Math.round((w / total) * 100), direction }))
+    .map(([key, w, direction]) => ({ key, weight: Math.round((w / total) * 100), direction }))
     .sort((x, y) => y.weight - x.weight);
 }

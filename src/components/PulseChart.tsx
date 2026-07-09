@@ -11,11 +11,13 @@ export default function PulseChart({
   forecast,
   labels,
   height = 260,
+  formatLabel = (s) => s,
 }: {
   history: MonthRow[];
   forecast: ForecastPoint[];
   labels: { income: string; net: string; forecast: string };
   height?: number;
+  formatLabel?: (label: string) => string;
 }) {
   const W = 980;
   const H = height;
@@ -104,7 +106,7 @@ export default function PulseChart({
       {[...history.map((r) => r.label), ...forecast.map((f) => f.label)].map((lb, i) =>
         i % tickEvery === 0 ? (
           <text key={i} x={x(i)} y={H - 10} fontSize="10.5" fill={i >= nH ? "#1e7d46" : "#7d977f"} textAnchor="middle" fontWeight={i >= nH ? 700 : 400}>
-            {lb}
+            {formatLabel(lb)}
           </text>
         ) : null
       )}
