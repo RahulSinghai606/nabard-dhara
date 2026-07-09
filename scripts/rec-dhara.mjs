@@ -73,11 +73,11 @@ const run = async () => {
 
   // switch to Hindi
   await page.evaluate(() => { const b = [...document.querySelectorAll("button")].find((x) => x.textContent.trim() === "हिन्दी"); b?.click(); });
-  await caption(page, "One tap — the whole cockpit speaks Hindi", "5 languages: English · हिन्दी · বাংলা · मराठी · தமிழ்", NAVY);
-  await sleep(5500);
+  await caption(page, "One tap — EVERYTHING speaks Hindi: flags, factors, chart, buttons", "5 languages: English · हिन्दी · বাংলা · मराठी · தமிழ் — down to the month labels", NAVY);
+  await sleep(7000);
 
   // ask dhara
-  await clickBtn(page, "Ask DHARA");
+  await clickBtn(page, "धारा से पूछें");
   await caption(page, "Ask DHARA — the Insight Engine writes advice in the officer's language", "", NAVY);
   await page.waitForSelector("text=अभी यह करें", { timeout: 90000 }).catch(() => {});
   await page.evaluate(() => { const el = [...document.querySelectorAll("p")].find((p) => p.textContent.includes("धारा की सलाह")); el?.closest(".pulse-card")?.scrollIntoView({ behavior: "smooth", block: "center" }); });
